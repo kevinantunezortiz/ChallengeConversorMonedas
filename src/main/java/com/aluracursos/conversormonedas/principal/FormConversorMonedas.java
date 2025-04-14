@@ -6,17 +6,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class FormConversorMonedas {
     private JPanel miPanel;
-    private JComboBox comboDivisa2;
+    private JComboBox<String> comboDivisa2;
     private JButton convertirButton;
-    private JComboBox comboDivisa1;
+    private JComboBox<String> comboDivisa1;
     private JTextField txtCantidad;
     private JLabel lblValor;
     private JLabel lblTotal;
@@ -33,17 +29,14 @@ public class FormConversorMonedas {
             comboDivisa1.addItem(moneda);
             comboDivisa2.addItem(moneda);
         }
-        convertirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String divisa1 = comboDivisa1.getSelectedItem().toString();
-                String divisa2 = comboDivisa2.getSelectedItem().toString();
-                double cantidad = Double.parseDouble(txtCantidad.getText());
-                var apiDivisas = new ApiDivisas();
-                Resultado resultado = apiDivisas.obtenerResultado(monedas.get(divisa1), monedas.get(divisa2),cantidad);
-                lblValor.setText("Valor: "+resultado.valor());
-                lblTotal.setText("Total: "+resultado.total());
-            }
+        convertirButton.addActionListener(e -> {
+            String divisa1 = comboDivisa1.getSelectedItem()+"";
+            String divisa2 = comboDivisa2.getSelectedItem()+"";
+            double cantidad = Double.parseDouble(txtCantidad.getText());
+            var apiDivisas = new ApiDivisas();
+            Resultado resultado = apiDivisas.obtenerResultado(monedas.get(divisa1), monedas.get(divisa2),cantidad);
+            lblValor.setText("Valor: "+resultado.valor());
+            lblTotal.setText("Total: "+resultado.total());
         });
     }
 
