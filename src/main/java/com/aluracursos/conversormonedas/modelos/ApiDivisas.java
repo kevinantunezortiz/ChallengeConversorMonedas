@@ -18,20 +18,18 @@ public class ApiDivisas {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(direccion))
                 .build();
-        HttpResponse<String> response = null;
+        HttpResponse<String> response;
         try {
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-        String json = response.body();
-        return json;
+        return response.body();
     }
     public Resultado obtenerResultado(String divisa1, String divisa2, double cantidad){
         Gson gson = new Gson();
         String json = obtenerRespuesta(divisa1,divisa2,cantidad);
-        Resultado resultado = gson.fromJson(json, Resultado.class);
-        return resultado;
+        return gson.fromJson(json, Resultado.class);
     }
 }
