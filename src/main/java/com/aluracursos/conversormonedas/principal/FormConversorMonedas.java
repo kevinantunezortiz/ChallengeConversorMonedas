@@ -29,6 +29,7 @@ public class FormConversorMonedas {
     private void initComponents(){
         monedas = apiMonedas.obtenerMonedas();
         tablaResultados.setModel(model);
+        convertirButton.setEnabled(false);
         tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(120);
         tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
         for (String moneda : monedas.keySet()) {
@@ -45,6 +46,11 @@ public class FormConversorMonedas {
                 char c = e.getKeyChar();
                 if (!Character.isDigit(c) && c != '.') {
                     e.consume(); // Evita que se ingrese caracteres no permitidos
+                }
+                if(txtCantidad.getText().isEmpty()){
+                    convertirButton.setEnabled(false);
+                }else{
+                    convertirButton.setEnabled(true);
                 }
             }
         });
