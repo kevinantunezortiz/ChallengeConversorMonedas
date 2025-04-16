@@ -80,7 +80,7 @@
           <enabled value="true"/>
           <font size="20" style="1"/>
           <foreground color="-15631377"/>
-          <text value="Valor:"/>
+          <text value="1 USD ="/>
         </properties>
       </component>
       <component id="fcf0" class="javax.swing.JLabel" binding="lblTotal">

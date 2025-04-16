@@ -35,6 +35,7 @@ public class FormConversorMonedas {
             comboDivisa1.addItem(moneda);
             comboDivisa2.addItem(moneda);
         }
+        comboDivisa1.setSelectedIndex(3);
         convertirButton.addActionListener(e -> {
             convertirDivisas();
         });
@@ -60,12 +61,14 @@ public class FormConversorMonedas {
         String moneda1 = comboDivisa1.getSelectedItem() + "";
         String moneda2 = comboDivisa2.getSelectedItem() + "";
         String cantidad = txtCantidad.getText();
-        Resultado resultado = apiMonedas.obtenerResultado(monedas.get(moneda1), monedas.get(moneda2), cantidad);
-        lblValor.setText("Valor: " + resultado.getValor());
-        lblTotal.setText("Total: " + resultado.getTotal());
+        String moneda1Codigo = monedas.get(moneda1);
+        String moneda2Codigo = monedas.get(moneda2);
+        Resultado resultado = apiMonedas.obtenerResultado(moneda1Codigo, moneda2Codigo, cantidad);
+        lblValor.setText("1 "+moneda1Codigo+" = "+ resultado.getValor());
+        lblTotal.setText("Total: " + resultado.getTotal()+" "+moneda2Codigo);
         resultado.setCantidad(cantidad);
-        resultado.setMoneda1(moneda1);
-        resultado.setMoneda2(moneda2);
+        resultado.setMoneda1(moneda1Codigo+"-"+moneda1);
+        resultado.setMoneda2(moneda2Codigo+"-"+moneda2);
         model.addRow(resultado.getDatos());
         historialMonedas.guardarResultado(resultado);
     }

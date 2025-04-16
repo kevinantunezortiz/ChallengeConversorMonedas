@@ -1,6 +1,4 @@
-{"conversion_rate":20.0809,"conversion_result":20080.9,"moneda1":"Dólar Estadounidense","moneda2":"Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/15 23:50"}
-{"conversion_rate":4289.0076,"conversion_result":4289007.6,"moneda1":"Dólar Estadounidense","moneda2":"Peso Colombiano","cantidad":"1000","fechaHoraActual":"2025/04/15 23:50"}
-{"conversion_rate":213.5625,"conversion_result":213562.5,"moneda1":"Peso Mexicano","moneda2":"Peso Colombiano","cantidad":"1000","fechaHoraActual":"2025/04/15 23:50"}
-{"conversion_rate":20.0809,"conversion_result":20080.9,"moneda1":"Dólar Estadounidense","moneda2":"Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/15 23:55"}
-{"conversion_rate":7.3686E-4,"conversion_result":0.73686,"moneda1":"Peso Argentino","moneda2":"Euro","cantidad":"1000","fechaHoraActual":"2025/04/15 23:55"}
-{"conversion_rate":1.0,"conversion_result":12.333,"moneda1":"Peso Mexicano","moneda2":"Peso Mexicano","cantidad":"12.333","fechaHoraActual":"2025/04/16 00:01"}
+{"conversion_rate":20.0809,"conversion_result":20080.9,"moneda1":"USD-Dólar Estadounidense","moneda2":"MXN-Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/16 00:42"}
+{"conversion_rate":3.4247,"conversion_result":3424.7,"moneda1":"BRL-Real Brasileño","moneda2":"MXN-Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/16 00:42"}
+{"conversion_rate":0.004683,"conversion_result":4.683,"moneda1":"COP-Peso Colombiano","moneda2":"MXN-Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/16 00:42"}
+{"conversion_rate":0.01672,"conversion_result":16.72,"moneda1":"ARS-Peso Argentino","moneda2":"MXN-Peso Mexicano","cantidad":"1000","fechaHoraActual":"2025/04/16 00:43"}
