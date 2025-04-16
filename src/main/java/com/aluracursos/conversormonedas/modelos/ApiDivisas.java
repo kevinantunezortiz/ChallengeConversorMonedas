@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class ApiDivisas {
 
 
-    private String obtenerRespuesta(String divisa1, String divisa2, double cantidad) {
+    public Resultado obtenerResultado(String divisa1, String divisa2, String cantidad) {
         String apikey = "f04170f78a1f513606b22a0b";
         String direccion = "https://v6.exchangerate-api.com/v6/"+apikey+"/pair/"+divisa1+"/"+divisa2+"/"+cantidad;
         HttpClient client = HttpClient.newHttpClient();
@@ -25,11 +25,9 @@ public class ApiDivisas {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return response.body();
-    }
-    public Resultado obtenerResultado(String divisa1, String divisa2, double cantidad){
+        String json = response.body();
         Gson gson = new Gson();
-        String json = obtenerRespuesta(divisa1,divisa2,cantidad);
-        return gson.fromJson(json, Resultado.class);
+        Resultado resultado = gson.fromJson(json,Resultado.class);
+        return resultado;
     }
 }
