@@ -11,8 +11,9 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class FormConversorMonedas {
+public class FormConversorMonedas extends  JFrame{
     private JPanel miPanel;
     private JComboBox<String> comboDivisa2;
     private JButton convertirButton;
@@ -26,12 +27,19 @@ public class FormConversorMonedas {
     private final HistorialMonedas historialMonedas = new HistorialMonedas();
     private final DefaultTableModel model = new DefaultTableModel(new Object[]{"Moneda 1", "Moneda 2","Cantidad","Valor","Total","Fecha"},0);
 
-    private void initComponents(){
+    public FormConversorMonedas()  {
+        ImageIcon img = new ImageIcon(Objects.requireNonNull(FormConversorMonedas.class.getResource("/icon.png"))); // Reemplaza "icono.png" con el nombre de tu archivo
+        Image icon = img.getImage();
+        setIconImage(icon);
+        setContentPane(miPanel);
+        setTitle("Conversor de Monedas");
+        getContentPane().setPreferredSize(new Dimension(800, 300));
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
         monedas = apiMonedas.obtenerMonedas();
-        tablaResultados.setModel(model);
-        convertirButton.setEnabled(false);
-        tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(120);
-        tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
         for (String moneda : monedas.keySet()) {
             comboDivisa1.addItem(moneda);
             comboDivisa2.addItem(moneda);
@@ -41,27 +49,36 @@ public class FormConversorMonedas {
             convertirDivisas();
         });
         txtCantidad.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                convertirButton.setEnabled(!txtCantidad.getText().isEmpty());
+            }
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
+                String text = txtCantidad.getText();
+                convertirButton.setEnabled(!text.isEmpty());
                 if (!Character.isDigit(c) && c != '.') {
-                    e.consume(); // Evita que se ingrese caracteres no permitidos
+                    e.consume(); // Evita caracteres no permitidos
                 }
-                if(txtCantidad.getText().isEmpty()){
-                    convertirButton.setEnabled(false);
-                }else{
-                    convertirButton.setEnabled(true);
+                // Permite solo un punto decimal
+                if (c == '.' && text.contains(".")) {
+                    e.consume();
                 }
             }
         });
-
         mostrarHistorial();
+        convertirButton.setEnabled(false);
     }
     private void mostrarHistorial(){
-       var resultados = historialMonedas.obtenerResultados();
-       for (Resultado resultado: resultados){
-           model.addRow(resultado.getDatos());
-       }
+        tablaResultados.setModel(model);
+        tablaResultados.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tablaResultados.getColumnModel().getColumn(1).setPreferredWidth(120);
+        var resultados = historialMonedas.obtenerResultados();
+        for (Resultado resultado: resultados){
+            model.addRow(resultado.getDatos());
+        }
     }
     private void convertirDivisas(){
         String moneda1 = comboDivisa1.getSelectedItem() + "";
@@ -78,10 +95,6 @@ public class FormConversorMonedas {
         model.addRow(resultado.getDatos());
         historialMonedas.guardarResultado(resultado);
     }
-    public FormConversorMonedas() {
-        initComponents();
-    }
-
 
     public static void main(String[] args) {
         try {
@@ -89,14 +102,6 @@ public class FormConversorMonedas {
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
-
-        JFrame frame = new JFrame("Conversor de Monedas");
-        frame.setContentPane(new FormConversorMonedas().miPanel);
-        frame.getContentPane().setPreferredSize(new Dimension(800, 300));
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        FormConversorMonedas conversorMonedas = new FormConversorMonedas();
     }
 }
